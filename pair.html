@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pair Code</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* General Styling */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #000000; /* Solid black */
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    /* Container and Card */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 400px; /* Increased width */
+      padding: 30px; /* More padding */
+      background: #001f3f; /* Thick blue */
+      border-radius: 15px; /* Rounder corners */
+      box-shadow: 0 8px 25px rgba(0, 31, 63, 0.8); /* Stronger shadow */
+      text-align: center;
+    }
+
+    /* Headings and Text */
+    h3, h6 {
+      margin: 0 0 15px;
+      color: #00aced; /* Light blue */
+    }
+
+    h3 {
+      font-size: 2rem; /* Larger heading */
+    }
+
+    h6 {
+      font-size: 1.1rem; /* Slightly larger subheading */
+    }
+
+    /* Input and Button */
+    .input-container {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 15px;
+    }
+
+    .input-container input {
+      flex: 1;
+      padding: 15px; /* Bigger input */
+      border: none;
+      border-radius: 5px;
+      background: #0d1e30;
+      color: #ffffff;
+      font-size: 1.1rem; /* Larger text */
+    }
+
+    .input-container input:focus {
+      outline: none;
+      box-shadow: 0 0 10px #00aced;
+    }
+
+    .input-container button {
+      padding: 15px; /* Bigger button */
+      border: none;
+      border-radius: 5px;
+      background: #00aced;
+      color: #ffffff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .input-container button:hover {
+      transform: scale(1.1);
+      background: #007bb5;
+    }
+
+    /* Subtle Animation */
+    .card {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Status Message */
+    #status-message {
+      margin-top: 15px;
+      font-size: 1rem;
+      color: #ff6f61;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h3>NIKKA PAIR CODE 🌸</h3>
+      <h6>Made By H4KI XER</h6>
+      <h6>Enter Your Number with Country Code:</h6>
+      <div class="input-container">
+        <input type="number" id="number" placeholder="23481008xxx">
+        <button id="submit">Submit</button>
+      </div>
+      <p id="status-message"></p>
+    </div>
+  </div>
+
+  <script>
+    const button = document.getElementById("submit");
+    const input = document.getElementById("number");
+    const message = document.getElementById("status-message");
+
+    button.addEventListener("click", () => {
+      if (!input.value) {
+        message.textContent = "Please enter your number!";
+      } else if (input.value.length < 11) {
+        message.textContent = "Invalid number!";
+      } else {
+        message.textContent = "Processing...";
+        setTimeout(() => {
+          message.textContent = "Code sent successfully!";
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>
