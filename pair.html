@@ -6,143 +6,296 @@
   <title>Pair Code</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
-    /* General Styling */
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-color: #000000; /* Solid black */
-      color: #ffffff;
-      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #003366, #66ccff);
       overflow: hidden;
+      font-family: Arial, sans-serif;
     }
 
-    /* Container and Card */
+    .rain {
+      position: absolute;
+      width: 1px;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .rain:before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 50%;
+      width: 2px;
+      height: 30%;
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+      animation: rain 0.5s linear infinite;
+    }
+
+    @keyframes rain {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    .bubbles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .bubbles div {
+      position: absolute;
+      bottom: -150px;
+      width: 20px; /* Increased size */
+      height: 20px; /* Increased size */
+      background: rgba(255, 255, 255, 0.7); /* Changed color to white */
+      border-radius: 50%;
+      animation: bubble 15s infinite; /* Slower animation */
+    }
+
+    @keyframes bubble {
+      to {
+        transform: translateY(-100vh);
+      }
+    }
+
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      z-index: 1;
     }
 
-    .card {
-      width: 400px; /* Increased width */
-      padding: 30px; /* More padding */
-      background: #001f3f; /* Thick blue */
-      border-radius: 15px; /* Rounder corners */
-      box-shadow: 0 8px 25px rgba(0, 31, 63, 0.8); /* Stronger shadow */
+    .box {
+      width: 300px;
+      height: 320px;
+      padding: 20px;
+      position: relative;
       text-align: center;
+      background-color: #0066cc; /* Changed to blue */
+      border-radius: 10px;
+      transform: perspective(1000px) rotateY(0deg);
+      box-shadow: 0 0 20px rgba(250, 249, 249, 0.7);
+      position: relative;
     }
 
-    /* Headings and Text */
-    h3, h6 {
-      margin: 0 0 15px;
-      color: #00aced; /* Light blue */
-    }
-
-    h3 {
-      font-size: 2rem; /* Larger heading */
-    }
-
-    h6 {
-      font-size: 1.1rem; /* Slightly larger subheading */
-    }
-
-    /* Input and Button */
-    .input-container {
-      display: flex;
-      gap: 0.5rem;
-      margin-top: 15px;
+    #text {
+      color: #f6f5f5;
     }
 
     .input-container input {
-      flex: 1;
-      padding: 15px; /* Bigger input */
+      color: #f1eaea;
+    }
+
+    .centered-text {
+      color: #e9e4e4;
+    }
+
+    .input-container {
+      display: flex;
+      background: rgb(10, 10, 10);
+      border-radius: 1rem;
+      background: black;
+      box-shadow: black;
+      padding: 0.3rem;
+      gap: 0.3rem;
+      max-width: 300px;
+      width: 100%;
+    }
+
+    .input-container input {
+      border-radius: 0.8rem 0 0 0.8rem;
+      background: #e8e8e8;
+      box-shadow: inset 13px 13px 10px #dcdcdc, inset -13px -13px 10px #f4f4f4;
+      width: 100%;
+      flex-basis: 75%;
+      padding: 1rem;
       border: none;
-      border-radius: 5px;
-      background: #0d1e30;
-      color: #ffffff;
-      font-size: 1.1rem; /* Larger text */
+      border-left: 2px solid #ecf2f8;
+      color: #000000;
+      transition: all 0.2s ease-in-out;
     }
 
     .input-container input:focus {
+      border-left: 2px solid #ecf1f6;
       outline: none;
-      box-shadow: 0 0 10px #00aced;
+      box-shadow: inset 13px 13px 10px #f0f2f3, inset -13px -13px 10px #f4f4f4;
     }
 
     .input-container button {
-      padding: 15px; /* Bigger button */
-      border: none;
-      border-radius: 5px;
-      background: #00aced;
-      color: #ffffff;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+      flex-basis: 15%;
+      padding: 1rem;
+      background: #000000;
+      font-weight: 700;
+      letter-spacing: 0.3rem;
+      text-transform: uppercase;
+      color: white;
+      border: 2px solid red;
+      width: 90%;
+      border-radius: 0 1rem 1rem 0;
+      transition: all 0.2s ease-in-out;
     }
 
     .input-container button:hover {
-      transform: scale(1.1);
-      background: #007bb5;
+      background-color: red;
+      border-color: green;
     }
 
-    /* Subtle Animation */
-    .card {
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
+    @media (max-width: 500px) {
+      .input-container {
+        flex-direction: column;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      .input-container input {
+        border-radius: 0.8rem;
+      }
+
+      .input-container button {
+        padding: 0.4rem;
+        border-radius: 0.8rem;
       }
     }
 
-    /* Status Message */
-    #status-message {
-      margin-top: 15px;
-      font-size: 1rem;
-      color: #ff6f61;
+    .centered-text {
+      text-align: center;
+    }
+
+    @media (max-width: 500px) {
+      .box {
+        width: 90%; 
+      }
+    }
+
+    @media (max-width: 500px) {
+      .input-container input {
+        border-radius: 0.8rem;
+        width: 80%; 
+      }
+
+      .input-container button {
+        padding: 1rem;
+        border-radius: 0.9rem;
+        width: 100%; 
+      }
     }
   </style>
 </head>
 <body>
+  <div class="rain"></div>
+  <div class="bubbles">
+    <!-- Bubbles elements will be generated by JavaScript -->
+  </div>
   <div class="container">
-    <div class="card">
-      <h3>NIKKA PAIR CODE 🌸</h3>
-      <h6>Made By H4KI XER</h6>
-      <h6>Enter Your Number with Country Code:</h6>
-      <div class="input-container">
-        <input type="number" id="number" placeholder="23481008xxx">
-        <button id="submit">Submit</button>
+    <div class="main">
+      <div class="box" id="box">
+        <div id="text">
+          <i class="fa fa-user"></i>
+          <p>
+            <h3 class="centered-text">NIKKA PAIR CODE 🌸</h3>
+            <br>
+            <h6>Made By H4KI XER 👑.</h6>
+            <h6>Enter Your Number with Country Code.</h6>
+            <div class="input-container">
+              <input placeholder="23481008xxx" type="number" id="number" name="">
+              <button id="submit">Submit</button>
+            </div>
+            
+            <a id="waiting-message" class="centered-text" style="display: none;">Please wait a while</a>
+            <br>
+            <br>
+            <main id="pair"></main>
+          </p>
+        </div>
       </div>
-      <p id="status-message"></p>
     </div>
   </div>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
   <script>
-    const button = document.getElementById("submit");
-    const input = document.getElementById("number");
-    const message = document.getElementById("status-message");
+    let a = document.getElementById("pair");
+    let b = document.getElementById("submit");
+    let c = document.getElementById("number");
+    let box = document.getElementById("box");
 
-    button.addEventListener("click", () => {
-      if (!input.value) {
-        message.textContent = "Please enter your number!";
-      } else if (input.value.length < 11) {
-        message.textContent = "Invalid number!";
+    async function Copy() {
+      let text = document.getElementById("copy").innerText;
+      let obj = document.getElementById("copy");
+      await navigator.clipboard.writeText(obj.innerText.replace('CODE: ', ''));
+      obj.innerText = "COPIED";
+      obj.style = "color:blue;font-weight:bold";
+      obj.size = "5";
+      setTimeout(() => {
+        obj.innerText = text;
+        obj.style = "color:white;font-weight-bold";
+        obj.size = "5";
+      }, 500);
+    }
+
+    b.addEventListener("click", async (e) => {
+      e.preventDefault();
+      if (!c.value) {
+        a.innerHTML = '<a style="color:white;font-weight:bold">Enter your WhatsApp number with Country Code</a><br><br>';
+      } else if (c.value.replace(/[^0-9]/g, "").length < 11) {
+        a.innerHTML = '<a style="color:red;font-weight:bold">Invalid Number</a><br><br>';
       } else {
-        message.textContent = "Processing...";
-        setTimeout(() => {
-          message.textContent = "Code sent successfully!";
-        }, 2000);
+        const Wasi_Tech = c.value.replace(/[^0-9]/g, "");
+        let bb = "";
+        let bbc = "";
+        const cc = Wasi_Tech.split('');
+        cc.map(a => {
+          bbc += a;
+          if (bbc.length == 3) {
+            bb += " " + a;
+          } else if (bbc.length == 8) {
+            bb += " " + a;
+          } else {
+            bb += a;
+          }
+        });
+        c.type = "text";
+        c.value = "+" + bb;
+        c.style = "color:black;font-size:20px";
+        a.innerHTML = '<a style="color:white;font-weight:bold">Please Wait...</a><br><br>';
+        let { data } = await axios(`/code?number=${Wasi_Tech}`);
+        let code = data.code || "Service Unavailable";
+        a.innerHTML = '<font id="copy" onclick="Copy()" style="color:red;font-weight:bold" size="5">CODE: <span style="color:white;font-weight:bold">' + code + '</span></font><br><br><br>';
       }
     });
+
+    function createRain() {
+      const rain = document.querySelector('.rain');
+      for (let i = 0; i < 100; i++) {
+        const drop = document.createElement('div');
+        drop.style.left = `${Math.random() * 100}vw`;
+        drop.style.animationDelay = `${Math.random() * 2}s`;
+        rain.appendChild(drop);
+      }
+    }
+
+    function createBubbles() {
+      const bubblesContainer = document.querySelector('.bubbles');
+      for (let i = 0; i < 50; i++) {
+        const bubble = document.createElement('div');
+        bubble.style.left = `${Math.random() * 100}vw`;
+        bubble.style.width = `${Math.random() * 30 + 20}px`; /* Increased size */
+        bubble.style.height = bubble.style.width;
+        bubble.style.animationDuration = `${Math.random() * 10 + 10}s`; /* Slower animation */
+        bubble.style.animationDelay = `${Math.random() * 5}s`;
+        bubblesContainer.appendChild(bubble);
+      }
+    }
+
+    createRain();
+    createBubbles();
   </script>
 </body>
 </html>
